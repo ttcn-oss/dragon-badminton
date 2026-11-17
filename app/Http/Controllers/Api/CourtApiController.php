@@ -15,12 +15,17 @@ class CourtApiController extends Controller
             'description' => 'nullable|string',
             'status' => 'required|in:active,maintenance',
         ];
-    }
+}
 
     public function index()
-    {
-        return Court::orderBy('id')->get();
-    }
+{
+    return response()->json(
+        Court::orderBy('id')->get(),
+        200,
+        [],
+        JSON_UNESCAPED_UNICODE
+    );
+}
 
     public function store(Request $request)
     {
