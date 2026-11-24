@@ -22,7 +22,7 @@ class CourtController extends Controller
     public function store(Request $request)
     {
         Court::create($request->validate($this->rules()));
-        return redirect()->route('courts.index')->with('ok', 'Đã thêm sân');
+        return redirect('/courts')->with('ok', 'Đã thêm sân');
     }
 
     public function edit(Court $court)
@@ -33,13 +33,13 @@ class CourtController extends Controller
     public function update(Request $request, Court $court)
     {
         $court->update($request->validate($this->rules($court)));
-        return redirect()->route('courts.index')->with('ok', 'Đã cập nhật sân');
+        return redirect('/courts')->with('ok', 'Đã cập nhật sân');
     }
 
     public function destroy(Court $court)
     {
         $court->delete();
-        return redirect()->route('courts.index')->with('ok', 'Đã xóa sân');
+        return redirect('/courts')->with('ok', 'Đã xóa sân');
     }
 
     private function rules(?Court $court = null): array
