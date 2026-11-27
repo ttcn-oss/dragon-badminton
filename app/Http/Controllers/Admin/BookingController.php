@@ -9,8 +9,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::with(['user', 'court'])
-            ->orderByDesc('booking_date')->orderByDesc('start_time')->get();
+                $bookings = Booking::orderByDesc('id')->get();
 
         return view('admin.bookings.index', compact('bookings'));
     }

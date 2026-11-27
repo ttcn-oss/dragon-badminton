@@ -28,5 +28,4 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction \
 EXPOSE 80
 
 # Moi lan khoi dong: tao/cap nhat bang trong co so du lieu roi chay web
-CMD ["sh", "-c", "php artisan migrate --force && apache2-foreground"]
-
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && apache2-foreground"]

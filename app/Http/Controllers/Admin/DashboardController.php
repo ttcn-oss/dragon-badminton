@@ -11,12 +11,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $stats = [
-            'courts' => Court::count(),
-            'users' => User::where('role', 'user')->count(),
-            'today' => Booking::whereDate('booking_date', today())->where('status', '!=', 'cancelled')->count(),
+                $stats = [
+            'courts'  => Court::count(),
+            'users'   => User::where('role', 'customer')->count(),
+            'today'   => \Illuminate\Support\Facades\DB::table('booking_slots')
+                            ->whereDate('slot_start', today())
+                            ->where('active_flag', 1)
+                            ->distinct()->count('booking_id'),
             'pending' => Booking::where('status', 'pending')->count(),
-            'revenue' => Booking::where('status', 'confirmed')->sum('total_price'),
+            'revenue' => Booking::where('status', 'confirmed')->sum('total_amount'),
         ];
 
         return view('admin.dashboard', compact('stats'));
