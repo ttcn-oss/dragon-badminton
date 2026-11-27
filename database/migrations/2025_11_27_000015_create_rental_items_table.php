@@ -8,17 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('courts', function (Blueprint $table) {
+        Schema::create('rental_items', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->string('status')->default('active');
+            $table->unsignedInteger('total_qty')->default(0);
+            $table->unsignedInteger('price_per_use')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('courts');
+        Schema::dropIfExists('rental_items');
     }
 };

@@ -8,15 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('courts', function (Blueprint $table) {
-            $table->unsignedInteger('price_per_hour')->default(100000);
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('key')->unique();
+            $table->text('value')->nullable();
+            $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::table('courts', function (Blueprint $table) {
-            $table->dropColumn('price_per_hour');
-        });
+        Schema::dropIfExists('settings');
     }
 };
